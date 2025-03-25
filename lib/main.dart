@@ -209,7 +209,6 @@ class CalculatorScreenState extends State<CalculatorScreen> {
       {Color? textcolor, Icon? icon, int flex = 1}) {
     return Padding(
         padding: const EdgeInsets.all(4.0),
-        //icon != null?
         child: TextButton(
           onPressed: onPressed,
           child: Text(
@@ -242,7 +241,7 @@ class CalculatorScreenState extends State<CalculatorScreen> {
         // mainAxisSize: MainAxisSize.min,
         children: [
           Expanded(
-              flex: 1,
+              flex: 2,
               child: Column(
                 children: [
                   Container(
@@ -315,120 +314,115 @@ class CalculatorScreenState extends State<CalculatorScreen> {
                   //   ),
                 ],
               )),
-          Expanded(
-            flex: 1,
-            // height: MediaQuery.sizeOf(context).height * 0.4,
-            child: Column(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    if (isInScientificMode)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          button('sin', () => performScientificOperation('sin'),
-                              textcolor: Colors.blueAccent),
-                          button('cos', () => performScientificOperation('cos'),
-                              textcolor: Colors.blueAccent),
-                          button('tan', () => performScientificOperation('tan'),
-                              textcolor: Colors.blueAccent),
-                          button('log', () => performScientificOperation('log'),
-                              textcolor: Colors.blueAccent),
-                        ],
-                      ),
-                    if (isInScientificMode)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          button('ln', () => performScientificOperation('ln'),
-                              textcolor: Colors.blueAccent),
-                          button('√', () => performScientificOperation('√'),
-                              textcolor: Colors.blueAccent),
-                          button('x²', () => performScientificOperation('x²'),
-                              textcolor: Colors.blueAccent),
-                        ],
-                      ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    if (isInScientificMode)
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          button('^', () => setOperation('^'),
-                              textcolor: Colors.blueAccent),
-                          button('π', () => performScientificOperation('π'),
-                              textcolor: Colors.blueAccent),
-                          button('e', () => performScientificOperation('e'),
-                              textcolor: Colors.blueAccent),
-                          button('!', () => performScientificOperation('!'),
-                              textcolor: Colors.blueAccent),
-                          button(
-                              isInRadianMode ? 'DEG' : 'RAD', toggleAngleMode,
-                              textcolor: Colors.blueAccent),
-                        ],
-                      ),
-                    Column(
+          Column(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (isInScientificMode)
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        button('C', clear, textcolor: Colors.redAccent),
-                        button('7', () => addDigit('7')),
-                        button('4', () => addDigit('4')),
-                        button('1', () => addDigit('1')),
-                        button('.', addDecimal),
+                        button('√', () => performScientificOperation('√'),
+                            textcolor: Colors.blueAccent),
+                        button('x²', () => performScientificOperation('x²'),
+                            textcolor: Colors.blueAccent),
                       ],
                     ),
-                    Column(
+                  if (isInScientificMode)
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        button('±', () => performScientificOperation('±')),
-                        button('8', () => addDigit('8')),
-                        button('5', () => addDigit('5')),
-                        button('2', () => addDigit('2')),
-                        button('0', () => addDigit('0')),
+                        button('sin', () => performScientificOperation('sin'),
+                            textcolor: Colors.blueAccent),
+                        button('cos', () => performScientificOperation('cos'),
+                            textcolor: Colors.blueAccent),
+                        button('tan', () => performScientificOperation('tan'),
+                            textcolor: Colors.blueAccent),
+                        button('log', () => performScientificOperation('log'),
+                            textcolor: Colors.blueAccent),
+                        button('ln', () => performScientificOperation('ln'),
+                            textcolor: Colors.blueAccent),
                       ],
                     ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  if (isInScientificMode)
                     Column(
+                      mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        button('%', () {
-                          setState(() {
-                            double value = double.parse(display);
-                            display = formatResult(value / 100);
-                          });
-                        }),
-                        button('9', () => addDigit('9')),
-                        button('6', () => addDigit('6')),
-                        button('3', () => addDigit('3')),
+                        button('^', () => setOperation('^'),
+                            textcolor: Colors.blueAccent),
+                        button('π', () => performScientificOperation('π'),
+                            textcolor: Colors.blueAccent),
+                        button('e', () => performScientificOperation('e'),
+                            textcolor: Colors.blueAccent),
+                        button('!', () => performScientificOperation('!'),
+                            textcolor: Colors.blueAccent),
+                        button(isInRadianMode ? 'DEG' : 'RAD', toggleAngleMode,
+                            textcolor: Colors.blueAccent),
                       ],
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        button('÷', () => setOperation('÷'),
-                            textcolor: Colors.orangeAccent),
-                        button('×', () => setOperation('×'),
-                            textcolor: Colors.orangeAccent),
-                        button('-', () => setOperation('-'),
-                            textcolor: Colors.orangeAccent),
-                        button('+', () => setOperation('+'),
-                            textcolor: Colors.orangeAccent),
-                        button('=', calculateResult,
-                            textcolor: Colors.greenAccent),
-                      ],
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      button('C', clear, textcolor: Colors.redAccent),
+                      button('7', () => addDigit('7')),
+                      button('4', () => addDigit('4')),
+                      button('1', () => addDigit('1')),
+                      button('.', addDecimal),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      button('±', () => performScientificOperation('±')),
+                      button('8', () => addDigit('8')),
+                      button('5', () => addDigit('5')),
+                      button('2', () => addDigit('2')),
+                      button('0', () => addDigit('0')),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      button('%', () {
+                        setState(() {
+                          double value = double.parse(display);
+                          display = formatResult(value / 100);
+                        });
+                      }),
+                      button('9', () => addDigit('9')),
+                      button('6', () => addDigit('6')),
+                      button('3', () => addDigit('3')),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      button('÷', () => setOperation('÷'),
+                          textcolor: Colors.orangeAccent),
+                      button('×', () => setOperation('×'),
+                          textcolor: Colors.orangeAccent),
+                      button('-', () => setOperation('-'),
+                          textcolor: Colors.orangeAccent),
+                      button('+', () => setOperation('+'),
+                          textcolor: Colors.orangeAccent),
+                      button('=', calculateResult,
+                          textcolor: Colors.greenAccent),
+                    ],
+                  ),
 
-                    // button(
-                    //     icon: Icon(Icons.backspace),
-                    //     () => backSpace()),
-                  ],
-                ),
-              ],
-            ),
+                  // button(
+                  //     icon: Icon(Icons.backspace),
+                  //     () => backSpace()),
+                ],
+              ),
+            ],
           ),
           const SizedBox(
             height: 100,
